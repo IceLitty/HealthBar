@@ -17,6 +17,8 @@
 #         
 # Symbols cannot be saved in .yml files, you can look
 # at the customization page to see them.
+#
+# In 101-format, you can use  {health} {max} and {name} variables.
 
 5-percent-bar: '&c5% HP'
 10-percent-bar: '&c10% HP'
@@ -38,3 +40,15 @@
 90-percent-bar: '&a90% HP'
 95-percent-bar: '&a95% HP'
 100-percent-bar: '&a100% HP'
+
+101-index-array: false
+101-format: '{name}&r [+] {percent}% &rHP'
+use-2-color-when-bigger-than-percent: 75
+2-color: '&2'
+use-a-color-when-bigger-than-percent: 55
+a-color: '&a'
+use-e-color-when-bigger-than-percent: 25
+e-color: '&e'
+use-c-color-when-bigger-than-percent: 0
+c-color: '&c'
+use-f-color-when-bigger-than-0-percent: '&f'

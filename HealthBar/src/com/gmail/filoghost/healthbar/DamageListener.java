@@ -266,8 +266,15 @@ public class DamageListener implements Listener {
 	    		  //what type of health should be displayed?
 			      if (barStyle == BarType.BAR)
 			      {
-			    	  mob.setCustomName("§r" + barArray[Utils.roundUpPositiveWithMax(((health/max) * 20.0), 20)]);
-			    	  
+			      	if (barArray.length == 21) {
+                        mob.setCustomName("§r" + barArray[Utils.roundUpPositiveWithMax(((health/max) * 20.0), 20)]);
+                    } else {
+			      	    String temp = barArray[Math.min(Math.max((int) Math.round(health / max * 100) + 1, 0), 100)];
+			      	    temp = temp.replace("{health}", String.valueOf(Utils.roundUpPositive(health)));
+                        temp = temp.replace("{max}", String.valueOf(Utils.roundUpPositive(max)));
+                        temp = temp.replace("{name}", getName(mob, mob.getType().toString()));
+                        mob.setCustomName("§r" + temp);
+                    }
 			      }
 			      else if (barStyle == BarType.CUSTOM_TEXT)
 			      {

@@ -96,29 +96,62 @@ public class MobBarsUtils {
 	 * Load the bars from a custom file
 	 */
 	public static String[] getCustomBars(FileConfiguration config) {
-		
-		String[] barArray = new String[21];
-		
-		barArray[0] = "";
-		
-		for (int i=1; i<21; i++) {
-			
-			barArray[i] = "";
-			
-			try {
+		if (config.getBoolean("101-index-array", false)) {
+            String[] barArray = new String[101];
+            String format = config.getString("101-format");
+            int color_2_percent = config.getInt("use-2-color-when-bigger-than-percent", 75);
+            String color_2 = config.getString("2-color", "&2");
+            int color_a_percent = config.getInt("use-a-color-when-bigger-than-percent", 55);
+            String color_a = config.getString("a-color", "&a");
+            int color_e_percent = config.getInt("use-e-color-when-bigger-than-percent", 25);
+            String color_e = config.getString("e-color", "&e");
+            int color_c_percent = config.getInt("use-c-color-when-bigger-than-percent", 0);
+            String color_c = config.getString("c-color", "&c");
+            String color_f = config.getString("use-f-color-when-bigger-than-0-percent", "&f");
+            for (int i = 0; i < barArray.length; i++) {
+                String singleString = format;
+                String percent = "";
+                if (i > color_2_percent) {
+                    percent = color_2 + i;
+                } else if (i > color_a_percent) {
+                    percent = color_a + i;
+                } else if (i > color_e_percent) {
+                    percent = color_e + i;
+                } else if (i > color_c_percent) {
+                    percent = color_c + i;
+                } else {
+                    percent = color_f + i;
+                }
+                singleString = singleString.replace("{percent}", percent);
+                singleString = Utils.replaceSymbols(singleString);
+                barArray[i] = singleString;
+            }
+            return barArray;
+        } else {
 
-				String cname = config.getString(i*5 + "-percent-bar");
-				
-				if (cname == null) cname = "";
-				
-				barArray[i] = Utils.replaceSymbols(cname);
+            String[] barArray = new String[21];
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+            barArray[0] = "";
 
-		}
-		
-		return barArray;
+            for (int i=1; i<21; i++) {
+
+                barArray[i] = "";
+
+                try {
+
+                    String cname = config.getString(i*5 + "-percent-bar");
+
+                    if (cname == null) cname = "";
+
+                    barArray[i] = Utils.replaceSymbols(cname);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            return barArray;
+        }
 	}
 }

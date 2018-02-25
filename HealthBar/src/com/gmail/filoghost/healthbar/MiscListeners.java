@@ -1,5 +1,6 @@
 package com.gmail.filoghost.healthbar;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -287,14 +288,14 @@ public class MiscListeners implements Listener {
 	//only needed for joinEvent
 	private static void fixTabName(Player p) {
 		if (fixTabNames && !pluginDisabledWhiteTabNames) {
-			if (p.getPlayerListName().startsWith("ง")) return; //is already colored!
+			if (p.getPlayerListName().startsWith("ยง")) return; //is already colored!
 			
 			if (p.getName().length() > 14) {
 				p.setPlayerListName(p.getName().substring(0, 14));
 				p.setPlayerListName(p.getName());
 			}
 			else {
-				p.setPlayerListName("งf" + p.getName());
+				p.setPlayerListName("ยงf" + p.getName());
 			}
 		}
 	}
@@ -320,9 +321,10 @@ public class MiscListeners implements Listener {
 					.replace(" ", "")
 					.split(","));
 		}
-		
-		Player[] playerlist = Bukkit.getOnlinePlayers();
-		if (playerlist.length != 0) {
+
+		List<Player> playerlist = new ArrayList<>();
+		playerlist.addAll(Bukkit.getServer().getOnlinePlayers());
+		if (!playerlist.isEmpty()) {
 		    for (Player p : playerlist) {
 		    	updatePlayer(p);
 		    	updateScoreboard(p, p.getWorld().getName().toLowerCase());

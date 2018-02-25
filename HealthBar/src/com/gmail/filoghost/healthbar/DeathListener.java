@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import com.gmail.filoghost.healthbar.api.HealthBarAPI;
+import org.bukkit.projectiles.ProjectileSource;
 
 public class DeathListener implements Listener {
 
@@ -61,7 +62,8 @@ public class DeathListener implements Listener {
 			//-----------------------ARROW---------------------------
 			if (deathMessage.contains("shot") || deathMessage.contains("shooted")) {
 				if (damager instanceof Projectile) {
-					LivingEntity shooter = ((Projectile)damager).getShooter();
+//					LivingEntity shooter = ((Projectile)damager).getShooter();
+                    ProjectileSource shooter = ((Projectile)damager).getShooter();
 					if (shooter instanceof Player) {
 						String itemname = ((Player)shooter).getItemInHand().getItemMeta().getDisplayName();
 						if (itemname==null) {
@@ -73,7 +75,7 @@ public class DeathListener implements Listener {
 						}
 					}
 					if (shooter instanceof LivingEntity) {
-						event.setDeathMessage(victim + " was shot by " + getName(shooter));
+						event.setDeathMessage(victim + " was shot by " + getName((LivingEntity) shooter));
 						return;
 					}
 				}
@@ -81,13 +83,14 @@ public class DeathListener implements Listener {
 			//-----------------------FIREBALL---------------------------
 			if (deathMessage.contains("fireballed")) {
 				if (damager instanceof Projectile) {
-					LivingEntity shooter = ((Projectile)damager).getShooter();
+//					LivingEntity shooter = ((Projectile)damager).getShooter();
+                    ProjectileSource shooter = ((Projectile)damager).getShooter();
 					if (shooter instanceof Player) {
 						event.setDeathMessage(victim + " was fireballed by " + ((Player)shooter).getName());
 						return;
 						}
 					if (shooter instanceof LivingEntity) {
-						event.setDeathMessage(victim + "was fireballed by " + getName(shooter));
+						event.setDeathMessage(victim + "was fireballed by " + getName((LivingEntity) shooter));
 						return;
 					}
 				}
