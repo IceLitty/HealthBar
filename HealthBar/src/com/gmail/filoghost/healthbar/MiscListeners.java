@@ -290,13 +290,13 @@ public class MiscListeners implements Listener {
 		if (fixTabNames && !pluginDisabledWhiteTabNames) {
 			if (p.getPlayerListName().startsWith("§")) return; //is already colored!
 			
-			if (p.getName().length() > 14) {
-				p.setPlayerListName(p.getName().substring(0, 14));
-				p.setPlayerListName(p.getName());
-			}
-			else {
-				p.setPlayerListName("§f" + p.getName());
-			}
+//			if (p.getName().length() > 14) {
+//				p.setPlayerListName(p.getName().substring(0, 14));
+//				p.setPlayerListName(p.getName());
+//			}
+//			else {
+//				p.setPlayerListName("§f" + p.getName());
+//			}
 		}
 	}
 	
@@ -324,7 +324,7 @@ public class MiscListeners implements Listener {
 
 		List<Player> playerlist = new ArrayList<>();
 		playerlist.addAll(Bukkit.getServer().getOnlinePlayers());
-		if (!playerlist.isEmpty()) {
+		if (playerlist.isEmpty()) {
 		    for (Player p : playerlist) {
 		    	updatePlayer(p);
 		    	updateScoreboard(p, p.getWorld().getName().toLowerCase());
